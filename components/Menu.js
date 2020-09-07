@@ -49,7 +49,30 @@ function menuMaker(menu) {
   const menuButton = document.querySelector(".menu-button");
 
   menuButton.addEventListener("click", () => {
-    menuDiv.classList.toggle("menu--open");
+    //menuDiv.classList.toggle("menu--open");
+    menuDiv.offsetLeft === 0
+      ? // eslint-disable-next-line no-undef
+        gsap.to(menuDiv, { duration: 0.5, left: -350 })
+      : // eslint-disable-next-line no-undef
+        gsap.to(menuDiv, { duration: 0.5, left: 0 });
+  });
+
+  let mouseOverMenu = false;
+
+  menuDiv.addEventListener("mouseenter", () => {
+    mouseOverMenu = true;
+  });
+
+  menuDiv.addEventListener("mouseleave", () => {
+    mouseOverMenu = false;
+  });
+
+  window.addEventListener("click", () => {
+    //menuDiv.classList.toggle("menu--open");
+    if (menuDiv.offsetLeft === 0 && mouseOverMenu === false) {
+      // eslint-disable-next-line no-undef
+      gsap.to(menuDiv, { duration: 0.5, left: -350 });
+    }
   });
 
   return menuDiv;
