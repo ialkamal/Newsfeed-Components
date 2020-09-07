@@ -117,6 +117,51 @@ const data = [
   Refresh the page to see the new article.
   */
 
+const articleBuilder = (htmlTag, title, date, body) => {
+  const articleDiv = document.createElement("div");
+  articleDiv.classList.add("article");
+
+  const articleH2 = document.createElement("h2");
+  articleH2.textContent = title;
+  articleDiv.appendChild(articleH2);
+
+  const articleDate = document.createElement("p");
+  articleDate.classList.add("date");
+  articleDate.textContent = date;
+  articleDiv.appendChild(articleDate);
+
+  const bodyArray = body.trim().split("\n");
+  bodyArray.forEach((para)=>{
+    const articleP = document.createElement("p");
+    articleP.textContent = para;
+    articleDiv.appendChild(articleP);
+  });
+
+  const articleSpan = document.createElement("span");
+  articleSpan.classList.add("expandButton");
+  articleSpan.textContent = "+";
+  articleSpan.addEventListener("click", (event) => {
+    //articleDiv.classList.toggle("article-open");
+    const artDiv = event.target.parentNode;
+    artDiv.offsetHeight === 50
+      ? gsap.to(artDiv, { duration: 0.5, height: 400 })
+      : gsap.to(artDiv, { duration: 0.5, height: 50 });
+  });
+  articleDiv.appendChild(articleSpan);
+
+  const btnClose = document.createElement("button");
+  btnClose.textContent = "Close";
+  btnClose.classList.add("closeButton");
+  btnClose.addEventListener("click", () => {
+    articleDiv.style.display = "none";
+  });
+  articleDiv.appendChild(btnClose);
+
+  console.log(articleDiv);
+
+  document.querySelector(htmlTag).appendChild(articleDiv);
+};
+
 function articleMaker(article) {
   const articleDiv = document.createElement("div");
   articleDiv.classList.add("article");
@@ -187,4 +232,19 @@ data.push({
 
 data.forEach((article) => {
   document.querySelector(".articles").appendChild(articleMaker(article));
+});
+
+document.querySelector("#submit").addEventListener("click", (event) => {
+  event.preventDefault();
+
+  articleBuilder(
+    ".articles",
+    document.querySelector("#title").value,
+    document.querySelector("#date").value,
+    document.querySelector("#paragraphs").value
+  );
+
+  document.querySelector("#title").value = "";
+  document.querySelector("#date").value = "";
+  document.querySelector("#paragraphs").value = "";
 });
