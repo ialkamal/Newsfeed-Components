@@ -1,4 +1,5 @@
 // This is the data we will be using, study it but don't change anything, yet.
+import gsap from "gsap";
 
 let menuItems = [
   "Students",
@@ -51,10 +52,8 @@ function menuMaker(menu) {
   menuButton.addEventListener("click", () => {
     //menuDiv.classList.toggle("menu--open");
     menuDiv.offsetLeft === 0
-      ? // eslint-disable-next-line no-undef
-        gsap.to(menuDiv, { duration: 0.5, left: -350 })
-      : // eslint-disable-next-line no-undef
-        gsap.to(menuDiv, { duration: 0.5, left: 0 });
+      ? gsap.to(menuDiv, { duration: 0.5, left: -350 })
+      : gsap.to(menuDiv, { duration: 0.5, left: 0 });
   });
 
   let mouseOverMenu = false;

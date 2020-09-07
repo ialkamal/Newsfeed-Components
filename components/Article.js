@@ -1,6 +1,8 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
+import gsap from "gsap";
+
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -147,10 +149,8 @@ function articleMaker(article) {
     //articleDiv.classList.toggle("article-open");
     const artDiv = event.target.parentNode;
     artDiv.offsetHeight === 50
-      ? // eslint-disable-next-line no-undef
-        gsap.to(artDiv, { duration: 0.5, height: 400 })
-      : // eslint-disable-next-line no-undef
-        gsap.to(artDiv, { duration: 0.5, height: 50 });
+      ? gsap.to(artDiv, { duration: 0.5, height: 400 })
+      : gsap.to(artDiv, { duration: 0.5, height: 50 });
   });
   articleDiv.appendChild(articleSpan);
 
