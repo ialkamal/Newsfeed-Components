@@ -3,17 +3,38 @@
 <html>
   <head>
     <title>Lambda School Newsfeed</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/index.less">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/index.less" />
     <script src="./components/Menu.js" defer></script>
     <script src="./components/Article.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   </head>
   <body>
     <div class="header">
-      <img class="menu-button" src="./assets/menu.png"/>
+      <img class="menu-button" src="./assets/menu.png" />
       <h1>Lambda School Newsfeed</h1>
     </div>
     <div class="articles"></div>
+    <form class="article-input">
+      <div class="form-line">
+        <label for="title">Title</label>
+        <input type="text" id="title" />
+      </div>
+      <div class="form-line">
+        <label for="date">Date</label>
+        <input type="text" id="date" />
+      </div>
+      <div class="form-line">
+        <label for="paragraphs">Article</label>
+        <textarea id="paragraphs" rows="10" cols="30"></textarea>
+      </div>
+      <div class="form-line">
+        <button id="submit">Submit</button>
+      </div>
+    </form>
   </body>
 </html>
 <!-- Do not add anything to the HTML -->

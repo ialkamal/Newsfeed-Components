@@ -1,12 +1,13 @@
 // This is the data we will be using, study it but don't change anything, yet.
+import gsap from "gsap";
 
 let menuItems = [
-  'Students',
-  'Faculty',
+  "Students",
+  "Faculty",
   "What's New",
-  'Tech Trends',
-  'Music',
-  'Log Out'
+  "Tech Trends",
+  "Music",
+  "Log Out",
 ];
 
 /* 
@@ -31,3 +32,49 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+
+function menuMaker(menu) {
+  const menuDiv = document.createElement("div");
+  menuDiv.classList.add("menu");
+
+  const menuUl = document.createElement("ul");
+
+  menu.forEach((menuItem) => {
+    let item = document.createElement("li");
+    item.textContent = menuItem;
+    menuUl.appendChild(item);
+  });
+
+  menuDiv.appendChild(menuUl);
+
+  const menuButton = document.querySelector(".menu-button");
+
+  menuButton.addEventListener("click", () => {
+    //menuDiv.classList.toggle("menu--open");
+    menuDiv.offsetLeft === 0
+      ? gsap.to(menuDiv, { duration: 0.5, left: -350 })
+      : gsap.to(menuDiv, { duration: 0.5, left: 0 });
+  });
+
+  let mouseOverMenu = false;
+
+  menuDiv.addEventListener("mouseenter", () => {
+    mouseOverMenu = true;
+  });
+
+  menuDiv.addEventListener("mouseleave", () => {
+    mouseOverMenu = false;
+  });
+
+  window.addEventListener("click", () => {
+    //menuDiv.classList.toggle("menu--open");
+    if (menuDiv.offsetLeft === 0 && mouseOverMenu === false) {
+      // eslint-disable-next-line no-undef
+      gsap.to(menuDiv, { duration: 0.5, left: -350 });
+    }
+  });
+
+  return menuDiv;
+}
+
+document.querySelector(".header").prepend(menuMaker(menuItems));
